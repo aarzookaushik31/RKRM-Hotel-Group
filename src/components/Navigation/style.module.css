@@ -1,0 +1,59 @@
+.navigation {
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.navigation input {
+  border: none;
+  flex: 1;
+  background-color: transparent;
+  outline: none;
+  color: rgba(133, 141, 157, 1);
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: 400;
+}
+.navigation input::placeholder {
+  color: rgba(133, 141, 157, 1);
+  font-size: 14px;
+  font-weight: 400;
+}
+.searcharea {
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 400px;
+  padding: 0 16px;
+  background-color: rgba(238, 240, 242, 1);
+}
+.navigationLeft {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.navigationLeft img {
+  width: 32px;
+}
+.notification {
+  margin-left: 30px;
+}
+.notification img {
+  width: 16px;
+}
+.hotelDropdown p:first-child {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(50, 113, 245, 1);
+}
+.hotelDropdown p:last-child {
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(82, 100, 132, 1);
+}
+.hotelDropdown p img {
+  margin-left: 7px;
+  width: 10px;
+}

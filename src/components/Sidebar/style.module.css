@@ -1,0 +1,73 @@
+.sidebar {
+  position: sticky;
+  left: 0;
+  top: 0;
+  width: 300px;
+  padding: 20px;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  background-color: #011324;
+  transition: 0.5s;
+}
+
+.sidebar.open {
+  width: 80px;
+  padding: 20px 10px;
+}
+
+.sidebar.open .hideinopen {
+  display: none;
+}
+.sidebar .logoContainer {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  margin-bottom: 20px;
+}
+.sidebar.open .logoContainer {
+  justify-content: center;
+}
+.sidebar .logoContainer img {
+  cursor: pointer;
+}
+.sidebar .logoContainer img.logo {
+  width: 100px;
+}
+.sidebar a,
+.dashboardLink {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+.sidebar a,
+.dashboardLink {
+  width: 100%;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 15px;
+  color: #5d6679;
+}
+
+.sidebar.open a,
+.sidebar.open .dashboardLink {
+  justify-content: center;
+}
+.sidebar a.activeLink {
+  color: #3271f5;
+  background-color: rgba(232, 241, 253, 0.1);
+}
+.sidebar img {
+  width: 20px;
+}
+.sidebar a.activeLink img {
+  filter: invert(19%) sepia(93%) saturate(3515%) hue-rotate(198deg)
+    brightness(95%) contrast(95%);
+}
+.logoContainer {
+  color: #5d6679;
+}
