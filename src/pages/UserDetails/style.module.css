@@ -1,0 +1,49 @@
+.userDetails {
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 12px;
+}
+.userImage {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.userImage img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+.userDetails h1 {
+  font-size: 24px;
+  color: #515767;
+  font-weight: 400;
+}
+.userDetails h2 {
+  font-size: 16px;
+  color: #515767;
+  font-weight: 400;
+}
+.userDetails span {
+  font-size: 16px;
+  font-weight: 400;
+  color: #666666;
+}
+.userDetails span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.fieldRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.fieldRow .detailItem div {
+  margin-top: 5px;
+  padding: 8px 12px;
+  font-size: 16px;
+  color: #666666;
+  background-color: #f4f6fd;
+}

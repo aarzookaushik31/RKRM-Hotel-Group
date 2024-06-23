@@ -7,12 +7,15 @@ import dashboard from "../../assets/dashboard.svg";
 import hotels from "../../assets/hotels.svg";
 import logout from "../../assets/logout.svg";
 import users from "../../assets/users.svg";
-import settings from "../../assets/settings.svg";
 import vouchers from "../../assets/voucher.svg";
 import membership from "../../assets/award.svg";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+  };
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -30,9 +33,16 @@ const Sidebar = () => {
           </div>
 
           <ul>
-            <li className={classes.dashboardLink}>
-              <img src={dashboard} alt="Dashboard" />{" "}
-              <span className={classes.hideinopen}>Dashboard</span>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? classes.activeLink : ""
+                }
+                to="/demo"
+              >
+                <img src={dashboard} alt="Icon" />{" "}
+                <span className={classes.hideinopen}>Dashboard</span>
+              </NavLink>
             </li>
             <li>
               <NavLink
@@ -41,7 +51,7 @@ const Sidebar = () => {
                 }
                 to="/"
               >
-                <img src={hotels} alt="Dashboard" />{" "}
+                <img src={hotels} alt="Icon" />{" "}
                 <span className={classes.hideinopen}>Hotels</span>
               </NavLink>
             </li>
@@ -52,7 +62,7 @@ const Sidebar = () => {
                 }
                 to="/users"
               >
-                <img src={users} alt="users" />{" "}
+                <img src={users} alt="icon" />{" "}
                 <span className={classes.hideinopen}>Users</span>
               </NavLink>
             </li>
@@ -61,9 +71,9 @@ const Sidebar = () => {
                 className={({ isActive }) =>
                   isActive ? classes.activeLink : ""
                 }
-                to="/demo"
+                to="/membership"
               >
-                <img src={membership} alt="membership" />{" "}
+                <img src={membership} alt="icon" />{" "}
                 <span className={classes.hideinopen}>Membership</span>
               </NavLink>
             </li>
@@ -72,27 +82,16 @@ const Sidebar = () => {
                 className={({ isActive }) =>
                   isActive ? classes.activeLink : ""
                 }
-                to="/demo"
+                to="/vouchers"
               >
-                <img src={vouchers} alt="vouchers" />{" "}
+                <img src={vouchers} alt="icon" />{" "}
                 <span className={classes.hideinopen}>Voucher</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? classes.activeLink : ""
-                }
-                to="/demo"
-              >
-                <img src={settings} alt="Dashboard" />{" "}
-                <span className={classes.hideinopen}>Settings</span>
               </NavLink>
             </li>
           </ul>
         </div>
-        <NavLink to="/demo">
-          <img src={logout} alt="logout" />{" "}
+        <NavLink to="/login" onClick={handleLogout}>
+          <img src={logout} alt="icon" />{" "}
           <span className={classes.hideinopen}>Logout</span>
         </NavLink>
       </div>

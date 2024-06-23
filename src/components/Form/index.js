@@ -1,89 +1,71 @@
-import React, { useState } from "react";
+import React from "react";
 import classes from "./style.module.css";
-const HotelForm = ({ isOpen, onSubmit }) => {
-  const [formData, setFormData] = useState({
-    hotelName: "",
-    hotelId: "",
-    phoneNumber: "",
-    address: "",
-    password: "",
-  });
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(formData);
-    setFormData({
-      hotelName: "",
-      hotelId: "",
-      phoneNumber: "",
-      address: "",
-      password: "",
-    });
+const HotelForm = ({
+  isOpen,
+  onSubmit,
+  initialValues,
+  validationSchema,
+  fields,
+  formTitle,
+}) => {
+  const handleSubmit = async (values, { setSubmitting }) => {
+    await onSubmit(values);
+    setSubmitting(false);
   };
 
   if (!isOpen) return null;
 
   return (
     <div className={classes.formContainer}>
-      <h1>Create Hotel</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Hotel Name
-          <input
-            type="text"
-            name="hotelName"
-            value={formData.hotelName}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label>
-          Hotel ID
-          <input
-            type="text"
-            name="hotelId"
-            value={formData.hotelId}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label>
-          Phone Number
-          <input
-            type="text"
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label>
-          Address
-          <input
-            type="text"
-            name="address"
-            value={formData.address}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label>
-          Password
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <button type="submit">Create Hotel</button>
-      </form>
+      <h1>{formTitle}</h1>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting }) => (
+          <Form>
+            {fields.map((field) => (
+              <div key={field.name}>
+                <label htmlFor={field.name}>{field.label}</label>
+                <ErrorMessage
+                  name={field.name}
+                  component="div"
+                  className={classes.error}
+                />
+
+                {field.type === "radio" ? (
+                  <div className={classes.radioGroup}>
+                    {field.options.map((option) => (
+                      <div key={option.value} className={classes.radioOption}>
+                        <Field
+                          type="radio"
+                          id={`${field.name}-${option.value}`}
+                          name={field.name}
+                          value={option.value}
+                        />
+                        <label
+                          htmlFor={`${field.name}-${option.value}`}
+                          className={classes.radioLabel}
+                        >
+                          {option.label}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <Field type={field.type} name={field.name} />
+                )}
+              </div>
+            ))}
+            <button type="submit" disabled={isSubmitting}>
+              {formTitle}
+            </button>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };

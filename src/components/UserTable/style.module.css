@@ -1,0 +1,155 @@
+.tablearea {
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  height: 100%;
+}
+.tablearea ::-webkit-scrollbar {
+  width: 0;
+}
+.tableTab {
+  padding: 10px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tableTab button {
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 400;
+  color: white;
+  background-color: rgba(50, 113, 245, 1);
+  border: none;
+  border-radius: 4px;
+}
+.table {
+  max-height: 87%;
+  flex: 1;
+  background-color: white;
+  padding: 10px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 15px;
+}
+.tableContainer {
+  flex: 1;
+  overflow: auto;
+}
+table {
+  width: 100%;
+  border-spacing: 0;
+}
+thead {
+  position: sticky;
+  top: 0;
+  background-color: rgba(244, 246, 253, 1);
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(124, 131, 152, 1);
+  z-index: 99;
+}
+table th img {
+  margin: 0 0 -3px 10px;
+}
+th,
+td {
+  text-align: left;
+  padding: 10px;
+}
+.center {
+  text-align: center;
+}
+tbody tr td,
+tbody tr td a {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(81, 87, 103, 1);
+  padding: 16px 10px;
+  border-bottom: 1px solid rgba(244, 246, 253, 1);
+}
+tbody tr:last-child td {
+  border-bottom: none;
+}
+.pointer {
+  cursor: pointer;
+}
+
+.activeDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(56, 159, 117, 1);
+  margin-right: 8px;
+}
+.disabledDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(239, 67, 67, 1);
+  margin-right: 8px;
+}
+
+.popup {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 70%;
+  right: 30%;
+  z-index: 99;
+}
+.popup button:first-child {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+.popup button:last-child {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.popup button {
+  color: rgba(81, 87, 103, 1);
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  color: rgba(29, 30, 33, 1);
+  font-size: 16px;
+  padding: 8px 12px;
+  width: 120px;
+}
+.toggleButtonClick {
+  text-align: center;
+  position: relative;
+}
+.noHotelFound {
+  padding-top: 100px;
+  text-align: center;
+  font-size: 18px;
+  color: rgba(124, 131, 152, 1);
+}
+.dropdownSelection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.dropdownSelection button {
+  padding: 10px 16px;
+  background-color: transparent;
+  color: rgba(81, 87, 103, 1);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+.hiddenLabel {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}

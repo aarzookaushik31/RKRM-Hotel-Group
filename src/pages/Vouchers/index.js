@@ -1,7 +1,7 @@
 import EmptyPageContent from "../../components/Emptypage/index";
 import people from "../../assets/People.webp";
 
-const Users = () => {
+const Vouchers = () => {
   const handleClick = () => {
     console.log("button clicked");
   };
@@ -9,13 +9,13 @@ const Users = () => {
     <>
       <EmptyPageContent
         image={people}
-        title="No users created"
+        title="No Vouchers created"
         description="Click the below button to get started"
-        buttonText="Create New User"
+        buttonText="Create New Voucher"
         clickHandler={handleClick}
       />
     </>
   );
 };
 
-export default Users;
+export default Vouchers;
