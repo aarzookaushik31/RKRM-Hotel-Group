@@ -4,6 +4,8 @@ import people from "../../assets/People.webp";
 import Form from "../../components/MembershipForm/index";
 import ModalContainer from "../../components/Modal/index";
 import MembershipTable from "../../components/MembershipTable/index";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Users = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -22,7 +24,7 @@ const Users = () => {
 
     try {
       const response = await fetch(
-        `http://13.233.97.114:3000/membership/list?hotelId=${hotelId}`
+        `http://43.204.15.248:3000/membership/list?hotelId=${hotelId}`
       );
       if (response.ok) {
         const responseData = await response.json();
@@ -50,7 +52,7 @@ const Users = () => {
 
     try {
       const response = await fetch(
-        "http://13.233.97.114:3000/membership/create",
+        "http://43.204.15.248:3000/membership/create",
         {
           method: "POST",
           headers: {
@@ -61,6 +63,11 @@ const Users = () => {
       );
 
       if (response.ok) {
+        toast.success("Membership Added Successfully !", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+        });
         fetchMembershipData();
       } else {
         console.error("Failed to save membership:", response.statusText);
@@ -83,7 +90,7 @@ const Users = () => {
   const handleStatusUpdate = async (membershipId, isActive) => {
     try {
       const response = await fetch(
-        "http://13.233.97.114:3000/membership/edit",
+        "http://43.204.15.248:3000/membership/edit",
         {
           method: "PUT",
           headers: {

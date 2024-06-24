@@ -17,9 +17,12 @@ const UserTable = ({
   handleRowsPerPageChange,
   setPageUrl,
   onIdFilterChange,
+  totalCount,
 }) => {
   const [popupIndex, setPopupIndex] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+
+  const totalPages = Math.ceil(totalCount / rowsPerPage);
 
   const handlePrevPage = () => {
     if (currentPage > 1) {
@@ -27,10 +30,11 @@ const UserTable = ({
       setPageUrl(currentPage - 1);
     }
   };
-
   const handleNextPage = () => {
-    setCurrentPage(currentPage + 1);
-    setPageUrl(currentPage + 1);
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+      setPageUrl(currentPage + 1);
+    }
   };
 
   const handlePopupClick = (index) => {
@@ -135,6 +139,7 @@ const UserTable = ({
           handlePageChange={setPageUrl}
           rowsPerPage={rowsPerPage}
           handleRowsPerPageChange={handleRowsPerPageChange}
+          totalPages={totalPages}
         />
       </div>
     </div>

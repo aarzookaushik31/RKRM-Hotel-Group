@@ -14,7 +14,7 @@ const UserDetails = () => {
     const fetchUserDetails = async () => {
       try {
         const response = await fetch(
-          `http://13.233.97.114:3000/user/detail?userId=${userId}`
+          `http://43.204.15.248:3000/user/detail?userId=${userId}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch user details");

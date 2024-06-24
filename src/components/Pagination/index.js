@@ -7,6 +7,7 @@ const Pagination = ({
   handlePrevPage,
   handleNextPage,
   handleRowsPerPageChange,
+  totalPages,
 }) => {
   return (
     <div className={classes.paginationContainer}>
@@ -42,7 +43,9 @@ const Pagination = ({
         </div>
         <div className={classes.pageNumber}>{currentPage}</div>
         <div
-          className={classes.nextButton}
+          className={`${classes.nextButton} ${
+            currentPage === totalPages ? classes.disabled : classes.pointer
+          }`}
           onClick={() => {
             handleNextPage();
           }}

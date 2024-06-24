@@ -5,6 +5,8 @@ import Form from "../../components/Form/index";
 import UserTable from "../../components/UserTable/index";
 import * as Yup from "yup";
 import { useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Users = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -16,6 +18,7 @@ const Users = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
   const [membershipOptions, setMembershipOptions] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
 
   useEffect(() => {
     const page = searchParams.get("page");
@@ -48,7 +51,7 @@ const Users = () => {
     page = 1
   ) => {
     try {
-      let url = `http://13.233.97.114:3000/hotel/user?hotelId=${hotelId}&page=${page}&limit=${limit}`;
+      let url = `http://43.204.15.248:3000/hotel/user?hotelId=${hotelId}&page=${page}&limit=${limit}`;
       if (membership) {
         url += `&membershipId=${membership}`;
       }
@@ -56,6 +59,8 @@ const Users = () => {
       if (response.ok) {
         const responseData = await response.json();
         const userDataArray = responseData.data.userList;
+        const totalCount = responseData.data.totalCount;
+        setTotalCount(totalCount);
         setUserData(userDataArray);
       } else {
         console.error("Failed to fetch User data:", response.statusText);
@@ -71,12 +76,17 @@ const Users = () => {
 
   const fetchMembershipOptions = async () => {
     try {
-      const url = `http://13.233.97.114:3000/membership/list?hotelId=${hotelId}`;
+      const url = `http://43.204.15.248:3000/membership/list?hotelId=${hotelId}`;
       const response = await fetch(url);
       if (response.ok) {
         const responseData = await response.json();
         const memberships = responseData.data.membershipList;
-        const formattedMemberships = memberships.map((membership) => ({
+
+        const activeMemberships = memberships.filter(
+          (membership) => membership.isActive
+        );
+
+        const formattedMemberships = activeMemberships.map((membership) => ({
           value: membership.membershipId,
           label: (
             <>
@@ -108,7 +118,7 @@ const Users = () => {
     };
 
     try {
-      const response = await fetch("http://13.233.97.114:3000/user/create", {
+      const response = await fetch("http://43.204.15.248:3000/user/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -117,7 +127,12 @@ const Users = () => {
       });
 
       if (response.ok) {
-        fetchUserData(rowsPerPage, currentPage);
+        toast.success("User Added Successfully !", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+        });
+        fetchUserData(membershipFilter, rowsPerPage, currentPage);
         setIsFormOpen(false);
       } else {
         console.error("Failed to save User:", response.statusText);
@@ -200,6 +215,7 @@ const Users = () => {
               handleRowsPerPageChange={handleRowsPerPageChange}
               setPageUrl={setPageUrl}
               currentPage={currentPage}
+              totalCount={totalCount}
             />
           )}
         </>

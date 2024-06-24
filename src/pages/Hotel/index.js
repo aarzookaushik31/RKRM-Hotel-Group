@@ -5,6 +5,8 @@ import Form from "../../components/Form/index";
 import HotelTable from "../../components/HotelTable/index";
 import * as Yup from "yup";
 import { useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Hotel = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -15,6 +17,7 @@ const Hotel = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [totalCount, setTotalCount] = useState(0);
 
   useEffect(() => {
     const page = searchParams.get("page");
@@ -43,7 +46,7 @@ const Hotel = () => {
 
   const fetchHotelData = async (city = "", limit = rowsPerPage, page = 1) => {
     try {
-      let url = `http://13.233.97.114:3000/hotel/location/list?hotelId=${hotelId}&limit=${limit}&page=${page}`;
+      let url = `http://43.204.15.248:3000/hotel/webapp/location/list?hotelId=${hotelId}&limit=${limit}&page=${page}`;
       if (city) {
         url += `&hotelCity=${city}`;
       }
@@ -52,6 +55,8 @@ const Hotel = () => {
       if (response.ok) {
         const responseData = await response.json();
         const hotelDataArray = responseData.data;
+        const totalCount = hotelDataArray.totalCount;
+        setTotalCount(totalCount);
         const hotels = hotelDataArray.hotelLocationList || [];
         setHotelData(hotels);
       } else {
@@ -76,7 +81,7 @@ const Hotel = () => {
 
     try {
       const response = await fetch(
-        "http://13.233.97.114:3000/hotel/add/location",
+        "http://43.204.15.248:3000/hotel/add/location",
         {
           method: "POST",
           headers: {
@@ -87,6 +92,11 @@ const Hotel = () => {
       );
 
       if (response.ok) {
+        toast.success("Hotel Added Successfully !", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+        });
         fetchHotelData(cityFilter, rowsPerPage, currentPage);
         setIsFormOpen(false);
       } else {
@@ -158,6 +168,7 @@ const Hotel = () => {
               handleRowsPerPageChange={handleRowsPerPageChange}
               setPageUrl={setPageUrl}
               currentPage={currentPage}
+              totalCount={totalCount}
             />
           )}
         </>

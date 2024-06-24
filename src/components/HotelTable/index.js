@@ -13,11 +13,15 @@ const HotelTable = ({
   onUpdateHotelData,
   onCityFilterChange,
   noDataMessage,
+  rowsPerPage,
   handleRowsPerPageChange,
   setPageUrl,
+  totalCount,
 }) => {
   const [popupIndex, setPopupIndex] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+
+  const totalPages = Math.ceil(totalCount / rowsPerPage);
 
   const handlePrevPage = () => {
     if (currentPage > 1) {
@@ -27,8 +31,10 @@ const HotelTable = ({
   };
 
   const handleNextPage = () => {
-    setCurrentPage(currentPage + 1);
-    setPageUrl(currentPage + 1);
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+      setPageUrl(currentPage + 1);
+    }
   };
 
   const toggleStatus = async (index) => {
@@ -43,7 +49,7 @@ const HotelTable = ({
 
     try {
       const response = await fetch(
-        `http://13.233.97.114:3000/hotel/location/edit`,
+        `http://43.204.15.248:3000/hotel/location/edit`,
         {
           method: "PUT",
           headers: {
@@ -163,6 +169,7 @@ const HotelTable = ({
             handlePrevPage={handlePrevPage}
             handleNextPage={handleNextPage}
             setPageUrl={setPageUrl}
+            totalPages={totalPages}
           />
         )}
       </div>
