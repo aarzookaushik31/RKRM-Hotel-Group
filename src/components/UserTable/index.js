@@ -76,7 +76,7 @@ const UserTable = ({
                 <tr key={index}>
                   <td></td>
                   <td>{user.name}</td>
-                  <td>Member</td>
+                  <td>{user.userMemberships.membershipName}</td>
                   <td>
                     {new Date(user.createdAt).toLocaleDateString("en-US", {
                       month: "long",
@@ -93,7 +93,7 @@ const UserTable = ({
                     {user.isActive ? "Active" : "Disabled"}
                   </td>
                   <td>
-                    <NavLink to={`/users/${user.membershipDetails[0].userId}`}>
+                    <NavLink to={`/users/${user.userMemberships.userId}`}>
                       View Details
                     </NavLink>
                   </td>

@@ -48,7 +48,7 @@ const Users = () => {
     page = 1
   ) => {
     try {
-      let url = `http://52.66.101.51:3000/hotel/user?hotelId=${hotelId}&page=${page}&limit=${limit}`;
+      let url = `http://13.233.97.114:3000/hotel/user?hotelId=${hotelId}&page=${page}&limit=${limit}`;
       if (membership) {
         url += `&membershipId=${membership}`;
       }
@@ -71,7 +71,7 @@ const Users = () => {
 
   const fetchMembershipOptions = async () => {
     try {
-      const url = `http://52.66.101.51:3000/membership/list?hotelId=${hotelId}`;
+      const url = `http://13.233.97.114:3000/membership/list?hotelId=${hotelId}`;
       const response = await fetch(url);
       if (response.ok) {
         const responseData = await response.json();
@@ -108,7 +108,7 @@ const Users = () => {
     };
 
     try {
-      const response = await fetch("http://52.66.101.51:3000/user/create", {
+      const response = await fetch("http://13.233.97.114:3000/user/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

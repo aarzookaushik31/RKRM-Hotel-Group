@@ -22,7 +22,7 @@ const Users = () => {
 
     try {
       const response = await fetch(
-        `http://52.66.101.51:3000/membership/list?hotelId=${hotelId}`
+        `http://13.233.97.114:3000/membership/list?hotelId=${hotelId}`
       );
       if (response.ok) {
         const responseData = await response.json();
@@ -50,7 +50,7 @@ const Users = () => {
 
     try {
       const response = await fetch(
-        "http://52.66.101.51:3000/membership/create",
+        "http://13.233.97.114:3000/membership/create",
         {
           method: "POST",
           headers: {
@@ -82,13 +82,16 @@ const Users = () => {
 
   const handleStatusUpdate = async (membershipId, isActive) => {
     try {
-      const response = await fetch("http://52.66.101.51:3000/membership/edit", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ membershipId, isActive }),
-      });
+      const response = await fetch(
+        "http://13.233.97.114:3000/membership/edit",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ membershipId, isActive }),
+        }
+      );
 
       if (response.ok) {
         fetchMembershipData();

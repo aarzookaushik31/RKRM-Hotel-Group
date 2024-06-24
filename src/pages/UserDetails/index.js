@@ -14,13 +14,13 @@ const UserDetails = () => {
     const fetchUserDetails = async () => {
       try {
         const response = await fetch(
-          `http://52.66.101.51:3000/user/detail?userId=${userId}`
+          `http://13.233.97.114:3000/user/detail?userId=${userId}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch user details");
         }
         const result = await response.json();
-        const data = result.data;
+        const data = result.data[0];
         console.log(data);
         setUser(data);
       } catch (error) {
@@ -44,7 +44,7 @@ const UserDetails = () => {
         </div>
         <div>
           <h1>{user.name}</h1>
-          <h2>Membership</h2>
+          <h2>{user.userMemberships.membershipName}</h2>
         </div>
       </div>
 
@@ -67,7 +67,6 @@ const UserDetails = () => {
             Date of Birth <img src={edit} alt="edit" />
           </span>
           <div>
-            {" "}
             {new Date(user.dob).toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",

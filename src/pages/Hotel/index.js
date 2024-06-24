@@ -43,7 +43,7 @@ const Hotel = () => {
 
   const fetchHotelData = async (city = "", limit = rowsPerPage, page = 1) => {
     try {
-      let url = `http://52.66.101.51:3000/hotel/location/list?hotelId=${hotelId}&limit=${limit}&page=${page}`;
+      let url = `http://13.233.97.114:3000/hotel/location/list?hotelId=${hotelId}&limit=${limit}&page=${page}`;
       if (city) {
         url += `&hotelCity=${city}`;
       }
@@ -76,7 +76,7 @@ const Hotel = () => {
 
     try {
       const response = await fetch(
-        "http://52.66.101.51:3000/hotel/add/location",
+        "http://13.233.97.114:3000/hotel/add/location",
         {
           method: "POST",
           headers: {

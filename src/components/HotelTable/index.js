@@ -43,7 +43,7 @@ const HotelTable = ({
 
     try {
       const response = await fetch(
-        `http://52.66.101.51:3000/hotel/location/edit`,
+        `http://13.233.97.114:3000/hotel/location/edit`,
         {
           method: "PUT",
           headers: {

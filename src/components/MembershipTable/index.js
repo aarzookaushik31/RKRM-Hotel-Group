@@ -34,10 +34,13 @@ const MembershipTable = ({
             <thead>
               <tr>
                 <th></th>
+
                 <th>Membership</th>
+                <th> Id</th>
                 <th>
                   Price <img src={idimg} alt="ID Sorting" />
                 </th>
+
                 <th>
                   Creation Date{" "}
                   <img src={columnSorting} alt="Creation Date Sorting" />
@@ -45,7 +48,7 @@ const MembershipTable = ({
                 <th>
                   Status <img src={columnSorting} alt="Status Sorting" />
                 </th>
-                <th>Activity</th>
+
                 <th className={classes.center}>Actions</th>
               </tr>
             </thead>
@@ -53,8 +56,11 @@ const MembershipTable = ({
               {membershipData.map((membership, index) => (
                 <tr key={index}>
                   <td></td>
+
                   <td>{membership.membershipName}</td>
+                  <td>{membership.membershipId}</td>
                   <td>₹{membership.membershipPrice}</td>
+
                   <td>
                     {new Date(membership.createdAt).toLocaleDateString(
                       "en-US",
@@ -75,7 +81,6 @@ const MembershipTable = ({
                     ></span>{" "}
                     {membership.isActive ? "Active" : "Disabled"}
                   </td>
-                  <td className={classes.pointer}>View Activity</td>
                   <td className={classes.toggleButtonClick}>
                     <img
                       className={classes.pointer}

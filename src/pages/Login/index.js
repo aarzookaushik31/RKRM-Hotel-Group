@@ -15,7 +15,7 @@ const Login = () => {
 
     try {
       const response = await fetch(
-        "http://52.66.101.51:3000/super-user/login",
+        "http://13.233.97.114:3000/super-user/login",
         {
           method: "POST",
           headers: {
@@ -45,7 +45,7 @@ const Login = () => {
 
     try {
       const response = await fetch(
-        "http://52.66.101.51:3000/super-user/create",
+        "http://13.233.97.114:3000/super-user/create",
         {
           method: "POST",
           headers: {
