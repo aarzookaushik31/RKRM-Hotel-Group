@@ -143,10 +143,12 @@ const Users = () => {
 
     setIsFormOpen(false);
   };
+
   const handleClick = async () => {
     await fetchMembershipOptions();
     setIsFormOpen(true);
   };
+
   const handleUpdateUserData = () => {
     fetchUserData(membershipFilter, rowsPerPage, currentPage);
   };
@@ -160,6 +162,57 @@ const Users = () => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setCurrentPage(1);
     setPageUrl(1);
+  };
+
+  const handleDisableUser = async (userId, isActive) => {
+    const userIndex = userData.findIndex(
+      (user) => user.userMemberships.userId === userId
+    );
+    if (userIndex === -1) {
+      console.error(`User with userId ${userId} not found.`);
+      return;
+    }
+
+    const updatedUser = {
+      userId: userId,
+      isActive: !isActive,
+      name: userData[userIndex].name,
+      email: userData[userIndex].email,
+      address: userData[userIndex].address,
+    };
+
+    try {
+      const response = await fetch(`http://43.204.15.248:3000/user/edit`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedUser),
+      });
+
+      if (response.ok) {
+        toast.success(
+          `User ${isActive ? "disabled" : "enabled"} successfully!`,
+          {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: true,
+          }
+        );
+
+        fetchUserData(membershipFilter, rowsPerPage, currentPage);
+      } else {
+        console.error(
+          `Failed to ${isActive ? "disable" : "enable"} user:`,
+          response.statusText
+        );
+      }
+    } catch (error) {
+      console.error(
+        `Error ${isActive ? "disabling" : "enabling"} user:`,
+        error
+      );
+    }
   };
 
   const formConfig = {
@@ -216,6 +269,7 @@ const Users = () => {
               setPageUrl={setPageUrl}
               currentPage={currentPage}
               totalCount={totalCount}
+              handleDisableUser={handleDisableUser}
             />
           )}
         </>

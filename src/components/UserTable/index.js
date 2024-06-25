@@ -7,17 +7,19 @@ import columnSorting from "../../assets/column-sorting.svg";
 import idimg from "../../assets/idimg.svg";
 import Pagination from "../Pagination/index";
 import Filter from "../FilterTableData/index";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UserTable = ({
   userData,
   onAddUser,
-  onUpdateUserData,
   rowsPerPage,
   noDataMessage,
   handleRowsPerPageChange,
   setPageUrl,
   onIdFilterChange,
   totalCount,
+  handleDisableUser,
 }) => {
   const [popupIndex, setPopupIndex] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -30,6 +32,7 @@ const UserTable = ({
       setPageUrl(currentPage - 1);
     }
   };
+
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
@@ -114,7 +117,12 @@ const UserTable = ({
                         onMouseLeave={() => setPopupIndex(null)}
                       >
                         <button
-                          onClick={() => onUpdateUserData(index)}
+                          onClick={() =>
+                            handleDisableUser(
+                              user.userMemberships.userId,
+                              user.isActive
+                            )
+                          }
                           className={
                             user.isActive
                               ? classes.disabledBtn

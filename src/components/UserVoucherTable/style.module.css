@@ -1,0 +1,34 @@
+.voucherStatus {
+  border-radius: 4px;
+  padding: 8px 12px;
+  border: 1px solid #ebebeb;
+  font-size: 14px;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.voucherStatus.redeemed {
+  color: #3271f5;
+}
+.voucherStatus.active {
+  color: green;
+}
+.voucherStatus.rejected {
+  color: #c14f28;
+}
+.activeDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(56, 159, 117, 1);
+  margin-right: 8px;
+}
+.disabledDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(239, 67, 67, 1);
+  margin-right: 8px;
+}
